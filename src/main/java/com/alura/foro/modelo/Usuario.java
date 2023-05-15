@@ -1,6 +1,7 @@
-package com.alura.modelo;
+package com.alura.foro.modelo;
 
-import com.alura.dto.usuario.DatosActualizarUsuario;
+import com.alura.foro.dto.usuario.DatosActualizarUsuario;
+import com.alura.foro.dto.usuario.DatosRegistroUsuario;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,6 +27,12 @@ public class Usuario {
 	private String nombre;
 	private String email;
 	private String contrasena;
+
+	public Usuario(DatosRegistroUsuario autor) {
+		this.nombre=autor.nombre();
+		this.email=autor.email();
+		this.contrasena=autor.contrasena();
+	}
 
 	public Usuario actualizarUsuario(DatosActualizarUsuario datosActualizarUsuario) {
 		if(datosActualizarUsuario.nombre() != null) {

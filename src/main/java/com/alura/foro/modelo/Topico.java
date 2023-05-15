@@ -1,11 +1,12 @@
-package com.alura.modelo;
+package com.alura.foro.modelo;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.alura.dto.topico.DatosActualizarTopico;
-import com.alura.dto.topico.DatosRegistroTopico;
+import com.alura.foro.dto.topico.DatosActualizarTopico;
+import com.alura.foro.dto.topico.DatosRegistroTopico;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -61,6 +62,8 @@ public class Topico {
 		this.titulo=datosRegistroTopico.titulo();
 		this.mensaje=datosRegistroTopico.mensaje();
 		this.curso=new Curso(datosRegistroTopico.curso());
+		this.autor=new Usuario(datosRegistroTopico.autor());
+		this.status=datosRegistroTopico.status();
 	}
 	
 	public Topico actualizarTopico(DatosActualizarTopico datosActualizarTopico) {

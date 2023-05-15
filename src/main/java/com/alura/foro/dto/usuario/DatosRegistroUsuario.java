@@ -1,4 +1,4 @@
-package com.alura.dto.usuario;
+package com.alura.foro.dto.usuario;
 
 import org.hibernate.validator.constraints.Length;
 

@@ -1,7 +1,7 @@
-package com.alura.modelo;
+package com.alura.foro.modelo;
 
-import com.alura.dto.curso.DatosActualizarCurso;
-import com.alura.dto.curso.DatosRegistroCurso;
+import com.alura.foro.dto.curso.DatosActualizarCurso;
+import com.alura.foro.dto.curso.DatosRegistroCurso;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

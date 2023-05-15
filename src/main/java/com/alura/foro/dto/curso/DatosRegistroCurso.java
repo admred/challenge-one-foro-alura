@@ -1,4 +1,4 @@
-package com.alura.dto.curso;
+package com.alura.foro.dto.curso;
 
 import jakarta.validation.constraints.NotBlank;
 
