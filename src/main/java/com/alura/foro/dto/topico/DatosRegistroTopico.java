@@ -5,7 +5,9 @@ import jakarta.validation.constraints.NotBlank;
 
 import jakarta.validation.constraints.NotNull;
 
+import com.alura.foro.dto.curso.DatosActualizarCurso;
 import com.alura.foro.dto.curso.DatosRegistroCurso;
+import com.alura.foro.dto.usuario.DatosActualizarUsuario;
 import com.alura.foro.dto.usuario.DatosRegistroUsuario;
 import com.alura.foro.modelo.Curso;
 import com.alura.foro.modelo.StatusTopico;
@@ -22,12 +24,12 @@ public record DatosRegistroTopico(
 		@NotNull
 		StatusTopico status,
 		
-		@Valid
 		@NotNull
-		DatosRegistroUsuario autor,
+		DatosActualizarCurso curso,
 		
-		@Valid
 		@NotNull
-		DatosRegistroCurso curso) {
+		DatosActualizarUsuario autor
+		
+		) {
 
 }

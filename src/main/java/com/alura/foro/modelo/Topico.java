@@ -22,12 +22,13 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 
 @Table(name="topicos")
 @Entity(name="Topico")
 @Getter
-@AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode
 public class Topico {
 	
@@ -58,12 +59,11 @@ public class Topico {
 	private List<Respuesta> respuestas = new ArrayList<>();
 
 
-	public Topico(DatosRegistroTopico datosRegistroTopico) {
-		this.titulo=datosRegistroTopico.titulo();
-		this.mensaje=datosRegistroTopico.mensaje();
-		this.curso=new Curso(datosRegistroTopico.curso());
-		this.autor=new Usuario(datosRegistroTopico.autor());
-		this.status=datosRegistroTopico.status();
+	public Topico(String titulo,String mensaje,Usuario autor,Curso curso) {
+		this.titulo=titulo;
+		this.mensaje=mensaje;
+		this.autor=autor;
+		this.curso=curso;
 	}
 	
 	public Topico actualizarTopico(DatosActualizarTopico datosActualizarTopico) {
