@@ -25,10 +25,10 @@ public record DatosRegistroTopico(
 		StatusTopico status,
 		
 		@NotNull
-		DatosActualizarCurso curso,
+		Long curso_id,
 		
 		@NotNull
-		DatosActualizarUsuario autor
+		Long autor_id
 		
 		) {
 

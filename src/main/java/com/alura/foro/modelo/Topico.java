@@ -73,12 +73,6 @@ public class Topico {
 		if(datosActualizarTopico.mensaje() != null) {
 			this.mensaje=datosActualizarTopico.mensaje();
 		}
-		if(datosActualizarTopico.autor() != null) {
-			this.autor.actualizarUsuario(datosActualizarTopico.autor());
-		}
-		if(datosActualizarTopico.curso() != null) {
-			this.curso.actualizarCurso(datosActualizarTopico.curso());
-		}
 		return this;
 	}
 }

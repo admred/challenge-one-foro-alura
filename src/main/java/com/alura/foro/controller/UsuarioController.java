@@ -3,6 +3,9 @@ package com.alura.foro.controller;
 import java.net.URI;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,11 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.alura.foro.dto.topico.DatosRespuestaTopico;
 import com.alura.foro.dto.usuario.DatosRegistroUsuario;
 import com.alura.foro.dto.usuario.DatosRespuestaUsuario;
 import com.alura.foro.repository.UsuarioRepository;
-import com.alura.foro.modelo.Topico;
 import com.alura.foro.modelo.Usuario;
 
 import jakarta.validation.Valid;
@@ -46,6 +47,11 @@ public class UsuarioController {
 		Usuario usuario=usuarioRepository.getReferenceById(id);
 		DatosRespuestaUsuario datosRespuestaUsuario=new DatosRespuestaUsuario(usuario);
 		return ResponseEntity.ok(datosRespuestaUsuario);
+	}
+	
+	@GetMapping
+	public Page<DatosRespuestaUsuario> listadoUsuarios(@PageableDefault(sort = "nombre" ) Pageable paginacion){
+		return usuarioRepository.findAll(paginacion).map(DatosRespuestaUsuario::new);
 	}
 	
 	
