@@ -8,6 +8,7 @@ Cada entidad tiene todas las Operaciones de un CRUD (Created, Remove, Update, De
 - Spring Boot 3
 - Spring boot REST
 - Mysql
+- Maven
 - Eclipse IDE
 - curl (para las pruebas en consola)
 
