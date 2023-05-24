@@ -270,5 +270,4 @@ $ curl -v -X DELETE  'http://localhost:8080/topicos/7' | jq
 
 
 ### Cosas que quedaron pendientes
-- Manejo de errores
 - Seguridad
