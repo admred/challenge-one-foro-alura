@@ -10,7 +10,7 @@ Cada entidad tiene todas las Operaciones de un CRUD (Created, Remove, Update, De
 - Spring boot REST
 - Mysql
 - Eclipse IDE
-- curl (linux)
+- curl (para las pruebas en consola)
 
 ### Estructura del proyecto
 - com.alura.foro
@@ -116,7 +116,7 @@ $ curl -v -X PUT 'http://localhost:8080/topicos' -H 'content-type: application/j
 ```
 #### Como obtener una lista de topicos
 ```
-$ curl -v -X GET 'http://localhost:8080/topicos' | jq
+$ curl -v -X GET 'http://localhost:8080/topicos' -H 'content-type: application/json' | jq
 Note: Unnecessary use of -X or --request, GET is already inferred.
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
@@ -126,6 +126,7 @@ Note: Unnecessary use of -X or --request, GET is already inferred.
 > Host: localhost:8080
 > User-Agent: curl/7.74.0
 > Accept: */*
+> content-type: application/json
 > 
 * Mark bundle as not supporting multiuse
 < HTTP/1.1 200 
@@ -208,6 +209,58 @@ Note: Unnecessary use of -X or --request, GET is already inferred.
   "empty": false
 }
 ```
+### Como obtener el detalle de un topico
+```
+$ curl -v -X GET 'http://localhost:8080/topicos/7' -H 'content-type: application/json' | jq
+Note: Unnecessary use of -X or --request, GET is already inferred.
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0*   Trying ::1:8080...
+* Connected to localhost (::1) port 8080 (#0)
+> GET /topicos/7 HTTP/1.1
+> Host: localhost:8080
+> User-Agent: curl/7.74.0
+> Accept: */*
+> content-type: application/json
+> 
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 200 
+< Content-Type: application/json
+< Transfer-Encoding: chunked
+< Date: Wed, 24 May 2023 19:02:43 GMT
+< 
+{ [149 bytes data]
+100   143    0   143    0     0   4333      0 --:--:-- --:--:-- --:--:--  4333
+* Connection #0 to host localhost left intact
+{
+  "id": 7,
+  "titulo": "Como crear un documento Markdown",
+  "mensaje": "Lorem ipsum ...",
+  "fechaCreacion": "2023-05-24T14:47:04",
+  "status": "NO_RESPONDIDO"
+}
+```
+### Como eliminar un topico
+```
+$ curl -v -X DELETE  'http://localhost:8080/topicos/7' | jq
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0*   Trying ::1:8080...
+* Connected to localhost (::1) port 8080 (#0)
+> DELETE /topicos/7 HTTP/1.1
+> Host: localhost:8080
+> User-Agent: curl/7.74.0
+> Accept: */*
+> 
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 204 
+< Date: Wed, 24 May 2023 19:04:48 GMT
+< 
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+* Connection #0 to host localhost left intact
+```
+
+
 
 ### Cosas que me quedaron pendientes
 - Manejo de errors
