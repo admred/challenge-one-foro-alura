@@ -51,7 +51,7 @@ Cada entidad tiene todas las Operaciones de un CRUD (Created, Remove, Update, De
 
 ### Como crear un topico
 ```
-curl -v -X POST 'http://localhost:8080/topicos' -H 'content-type: application/json' -d '{"titulo":"Como crear un README","curso_id":2,"autor_id":3,"mensaje":"Lorem ipsum ...","status":"NO_SOLUCIONADO"}'| jq
+curl -v -X POST 'http://localhost:8080/topicos' -H 'content-type: application/json' -d '{"titulo":"Como crear un README","curso_id":2,"autor_id":3,"mensaje":"Lorem ipsum ..."}'| jq
 Note: Unnecessary use of -X or --request, POST is already inferred.
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
@@ -208,3 +208,7 @@ Note: Unnecessary use of -X or --request, GET is already inferred.
   "empty": false
 }
 ```
+
+### Cosas que me quedaron pendientes
+- Manejo de errors
+- Seguridad
