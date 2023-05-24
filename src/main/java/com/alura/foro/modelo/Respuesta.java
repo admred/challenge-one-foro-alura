@@ -2,7 +2,7 @@ package com.alura.foro.modelo;
 
 import java.time.LocalDateTime;
 
-import com.alura.foro.dto.respuesta.DatosRegistroRespuesta;
+import com.alura.foro.dto.respuesta.DatosActualizarRespuesta;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,8 +12,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.Valid;
-import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -49,4 +47,12 @@ public class Respuesta {
 		this.topico=topico;
 		this.autor=autor;
 	}
+	
+	public Respuesta actualizarRespuesta(DatosActualizarRespuesta actualizarRespuesta ) {
+		if(actualizarRespuesta.mensaje() != null) {
+			this.mensaje=actualizarRespuesta.mensaje();
+		}
+		return this;
+	}
+	
 }

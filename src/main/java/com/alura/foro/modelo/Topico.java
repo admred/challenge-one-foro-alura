@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.alura.foro.dto.topico.DatosActualizarTopico;
-import com.alura.foro.dto.topico.DatosRegistroTopico;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

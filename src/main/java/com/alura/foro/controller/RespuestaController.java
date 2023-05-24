@@ -3,16 +3,22 @@ package com.alura.foro.controller;
 import java.net.URI;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.alura.foro.dto.respuesta.DatosRespuestaRespuesta;
+import com.alura.foro.dto.respuesta.DatosActualizarRespuesta;
 import com.alura.foro.dto.respuesta.DatosRegistroRespuesta;
 import com.alura.foro.repository.RespuestaRepository;
 import com.alura.foro.repository.TopicoRepository;
@@ -20,6 +26,8 @@ import com.alura.foro.repository.UsuarioRepository;
 import com.alura.foro.modelo.Respuesta;
 import com.alura.foro.modelo.Topico;
 import com.alura.foro.modelo.Usuario;
+
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
 @RestController
@@ -61,9 +69,25 @@ public class RespuestaController {
 		return ResponseEntity.ok(datosDetalleRespuesta);
 	}
 	
+	@GetMapping
+	public Page<DatosRespuestaRespuesta> listadoRespuestas(Pageable paginacion){
+		return respuestaRepository.findAll(paginacion).map(DatosRespuestaRespuesta::new);
+	}
 	
+	@DeleteMapping("/{id}")
+	@Transactional
+	public ResponseEntity deleteRespuesta(@PathVariable Long id) {
+		respuestaRepository.deleteById(id);
+		return ResponseEntity.noContent().build();
+	}
 	
-	
-	
-	
+	@PutMapping
+	@Transactional
+	public ResponseEntity<DatosRespuestaRespuesta> actualizarRespuesta(
+			@RequestBody @Valid DatosActualizarRespuesta datosActualizarRespuesta) {
+		
+		Respuesta respuesta=respuestaRepository.getReferenceById(datosActualizarRespuesta.id());
+		respuesta.actualizarRespuesta(datosActualizarRespuesta);
+		return ResponseEntity.ok(new DatosRespuestaRespuesta(respuesta));
+	}
 }
