@@ -3,12 +3,6 @@
 Este proyecto consiste es una **API backend** de un foro basico. 
 Cada entidad tiene todas las Operaciones de un CRUD (Created, Remove, Update, Delete) a traves de los comandos del protocolo HTTP, o sea: GET, POST, PUT y DELETE
 
-## Entidades
-- Topico
-- Usuario
-- Respuesta
-- Curso
-
 ### Tecnologias
 - java 17
 - Spring Boot 3
@@ -16,6 +10,11 @@ Cada entidad tiene todas las Operaciones de un CRUD (Created, Remove, Update, De
 - Mysql
 - Eclipse IDE
 - curl (para las pruebas en consola)
+
+### Diagrama Entidad-Relacion
+<p align="center">
+   <img src="/imagenes/diagrama.png"  alt="Diagrama de entidad relacion">
+</p>
 
 ### Estructura del proyecto
 - com.alura.foro
