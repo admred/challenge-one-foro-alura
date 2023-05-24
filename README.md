@@ -49,6 +49,8 @@ Cada entidad tiene todas las Operaciones de un CRUD (Created, Remove, Update, De
     - DatosRegistroRespuesta.java
     - DatosRespuestaRespuesta.java
 
+
+
 ### Como crear un topico
 ```
 curl -v -X POST 'http://localhost:8080/topicos' -H 'content-type: application/json' -d '{"titulo":"Como crear un README","curso_id":2,"autor_id":3,"mensaje":"Lorem ipsum ..."}'| jq
