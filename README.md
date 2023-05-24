@@ -1,10 +1,15 @@
 # Challenge ONE | Back End | Foro Alura 
 
-Este proyecto consiste en una **API backend** para un foro basico. 
-Cada entidad tiene todas las Operaciones de un CRUD (Created, Remove, Update, Delete)
+Este proyecto consiste es una **API backend** de un foro basico. 
+Cada entidad tiene todas las Operaciones de un CRUD (Created, Remove, Update, Delete) a traves de los comandos del protocolo HTTP, o sea: GET, POST, PUT y DELETE
 
+## Entidades
+- Topico
+- Usuario
+- Respuesta
+- Curso
 
-### Teconoligoas
+### Tecnologias
 - java 17
 - Spring Boot 3
 - Spring boot REST
@@ -264,6 +269,6 @@ $ curl -v -X DELETE  'http://localhost:8080/topicos/7' | jq
 
 
 
-### Cosas que me quedaron pendientes
-- Manejo de errors
+### Cosas que quedaron pendientes
+- Manejo de errores
 - Seguridad
