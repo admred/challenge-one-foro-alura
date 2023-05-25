@@ -1,7 +1,6 @@
 # Challenge ONE | Back End | Foro Alura 
 
-Este proyecto consiste es una **API backend** de un foro basico. 
-Cada entidad tiene todas las Operaciones de un CRUD (Created, Remove, Update, Delete) a traves de los comandos del protocolo HTTP, o sea: GET, POST, PUT y DELETE
+Este proyecto es una **API REST** del lado backend para un foro basico. 
 
 ### Tecnologias
 - java 17
