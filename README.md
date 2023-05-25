@@ -91,12 +91,12 @@ Note: Unnecessary use of -X or --request, POST is already inferred.
 
 ### Como actualizar un topico
 ```
-$ curl -v -X PUT 'http://localhost:8080/topicos' -H 'content-type: application/json' -d '{"id":7,"titulo":"Como crear un documento Markdown"}'| jq
+$ curl -v -X PUT 'http://localhost:8080/topicos/7' -H 'content-type: application/json' -d '{"titulo":"Como crear un documento Markdown"}'| jq
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0*   Trying ::1:8080...
 * Connected to localhost (::1) port 8080 (#0)
-> PUT /topicos HTTP/1.1
+> PUT /topicos/7 HTTP/1.1
 > Host: localhost:8080
 > User-Agent: curl/7.74.0
 > Accept: */*
