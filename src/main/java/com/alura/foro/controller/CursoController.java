@@ -71,12 +71,13 @@ public class CursoController {
 		return ResponseEntity.noContent().build();
 	}
 	
-	@PutMapping
+	@PutMapping("/{id}")
 	@Transactional
 	public ResponseEntity<DatosRespuestaCurso> actualizarCurso(
+			@PathVariable Long id,
 			@RequestBody @Valid DatosActualizarCurso datosActualizarCurso) {
 		
-		Curso curso=cursoRepository.getReferenceById(datosActualizarCurso.id());
+		Curso curso=cursoRepository.getReferenceById(id);
 		curso.actualizarCurso(datosActualizarCurso);
 		return ResponseEntity.ok(new DatosRespuestaCurso(curso));
 	}

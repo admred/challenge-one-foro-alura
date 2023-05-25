@@ -65,12 +65,13 @@ public class UsuarioController {
 		return ResponseEntity.noContent().build();
 	}
 	
-	@PutMapping
+	@PutMapping("/{id}")
 	@Transactional
 	public ResponseEntity<DatosRespuestaUsuario> actualizarUsuario(
+			@PathVariable Long id,
 			@RequestBody @Valid DatosActualizarUsuario datosActualizarUsuario) {
 		
-		Usuario usuario=usuarioRepository.getReferenceById(datosActualizarUsuario.id());
+		Usuario usuario=usuarioRepository.getReferenceById(id);
 		usuario.actualizarUsuario(datosActualizarUsuario);
 		return ResponseEntity.ok(new DatosRespuestaUsuario(usuario));
 	}

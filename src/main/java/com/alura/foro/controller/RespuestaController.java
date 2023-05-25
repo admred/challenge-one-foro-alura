@@ -81,12 +81,13 @@ public class RespuestaController {
 		return ResponseEntity.noContent().build();
 	}
 	
-	@PutMapping
+	@PutMapping("/{id}")
 	@Transactional
 	public ResponseEntity<DatosRespuestaRespuesta> actualizarRespuesta(
+			@PathVariable Long id,
 			@RequestBody @Valid DatosActualizarRespuesta datosActualizarRespuesta) {
 		
-		Respuesta respuesta=respuestaRepository.getReferenceById(datosActualizarRespuesta.id());
+		Respuesta respuesta=respuestaRepository.getReferenceById(id);
 		respuesta.actualizarRespuesta(datosActualizarRespuesta);
 		return ResponseEntity.ok(new DatosRespuestaRespuesta(respuesta));
 	}
