@@ -1,0 +1,1 @@
+INSERT INTO usuarios (login,nombre,email,contrasena) VALUES ("admin","Administrador","admin@example.com","$2y$10$LUx37krOhlDxpLND.4.vGOhAL.8tZ3sNgk8ujvvE0IGK9adYOBqLe");

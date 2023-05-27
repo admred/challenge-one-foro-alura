@@ -24,6 +24,7 @@ import com.alura.foro.repository.RespuestaRepository;
 import com.alura.foro.repository.TopicoRepository;
 import com.alura.foro.repository.UsuarioRepository;
 import com.alura.foro.modelo.Respuesta;
+import com.alura.foro.modelo.StatusTopico;
 import com.alura.foro.modelo.Topico;
 import com.alura.foro.modelo.Usuario;
 
@@ -51,6 +52,7 @@ public class RespuestaController {
 		
 		Usuario autor=usuarioRepository.getReferenceById(datosRegistroRespuesta.autor_id());
 		Topico topico=topicoRepository.getReferenceById(datosRegistroRespuesta.topico_id());
+		topico.setStatus(StatusTopico.NO_SOLUCIONADO);
 		Respuesta respuesta=new Respuesta(
 				datosRegistroRespuesta.mensaje(),
 				autor,

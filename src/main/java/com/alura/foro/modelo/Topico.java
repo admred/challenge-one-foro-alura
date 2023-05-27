@@ -21,6 +21,7 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
 @Table(name="topicos")
@@ -41,6 +42,8 @@ public class Topico {
 	@Column(name="creado")
 	private LocalDateTime fechaCreacion = LocalDateTime.now();
 	
+	@Setter
+	@Getter
 	@Enumerated(EnumType.STRING)
 	@Column(name="estado")
 	private StatusTopico status = StatusTopico.NO_RESPONDIDO;
