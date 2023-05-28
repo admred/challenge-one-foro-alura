@@ -29,13 +29,23 @@ public class SecurityFilter extends OncePerRequestFilter  {
 	@Override
 	protected void doFilterInternal(HttpServletRequest request,HttpServletResponse response,FilterChain filterChain) throws IOException, ServletException {
 		String jwtToken = extractToken(request);
-		if (jwtToken == null) filterChain.doFilter(request, response);
+		if (jwtToken == null) {
+			filterChain.doFilter(request, response);
+			return;
+		}
         
         String login=tokenService.getSubject(jwtToken);
-        if (login == null) filterChain.doFilter(request, response);
+        if (login == null) {
+        	filterChain.doFilter(request, response);
+        	return;
+        }
         
         UserDetails userDetails = usuarioRepository.findByLogin(login);
-        if (userDetails == null) filterChain.doFilter(request, response);
+        if (userDetails == null) { 
+        	filterChain.doFilter(request, response);
+        	return;
+        }
+        
         
         var authentication = new UsernamePasswordAuthenticationToken(
         		userDetails, 

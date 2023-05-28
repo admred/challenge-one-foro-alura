@@ -41,9 +41,8 @@ public class TokenService {
 	
 	
 	public String getSubject(String token) {
-		if(token == null) {
-			throw new RuntimeException("token null");
-		}
+		if(token == null) return null;
+		
 		DecodedJWT verifier=null;
 		try {
 		    Algorithm algorithm = Algorithm.HMAC256(apiSecret);
@@ -53,11 +52,11 @@ public class TokenService {
 		    	.verify(token);
 		     verifier.getSubject();
 		} catch (JWTVerificationException exception){
-		    throw new RuntimeException("NO SE PUDO VERIFICAR TOKEN");
+		    return null;
 		}
 		
 		if(verifier.getSubject() == null) {
-			throw new RuntimeException("verifier no valido");
+			return null;
 		}
 		return 	verifier.getSubject();	
 	}

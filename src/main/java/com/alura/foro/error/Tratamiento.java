@@ -1,6 +1,5 @@
 package com.alura.foro.error;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -29,17 +28,22 @@ public class Tratamiento {
 	
 	@ExceptionHandler(UsernameNotFoundException.class)
 	public ResponseEntity<?> tratarUsuarioNoEncontrado(UsernameNotFoundException e){
-		return ResponseEntity.status(HttpStatus.FORBIDDEN).body("*PLOP* Usuario no encontrado.\n");
+		return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new DatosAutenticacionRespuesta(e));
 	}
 	
 	@ExceptionHandler(BadCredentialsException.class)
 	public ResponseEntity<?> tratarNotAutorizado(BadCredentialsException e) {
-		return ResponseEntity.status(HttpStatus.FORBIDDEN).body("BEEP! Access Denied.\n");
+		return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new DatosAutenticacionRespuesta(e));
 	}
 	
 	private record DatosErrorValidacion(String campo,String error) {
 		public DatosErrorValidacion(FieldError error) {
 			this(error.getField(),error.getDefaultMessage());
+		}
+	}
+	private record DatosAutenticacionRespuesta(String status,String error) {
+		public DatosAutenticacionRespuesta(AuthenticationException ex) {
+			this("403",ex.getMessage());
 		}
 	}
 }
