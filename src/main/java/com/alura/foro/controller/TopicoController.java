@@ -1,11 +1,13 @@
 package com.alura.foro.controller;
 import java.net.URI;
 
+import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,9 +29,21 @@ import com.alura.foro.modelo.Usuario;
 import com.alura.foro.repository.CursoRepository;
 import com.alura.foro.repository.TopicoRepository;
 import com.alura.foro.repository.UsuarioRepository;
+import com.alura.foro.security.DatosJWTToken;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
+
 
 @RestController
 @RequestMapping("/topicos")
@@ -45,12 +59,14 @@ public class TopicoController {
 	private CursoRepository cursoRepository;
 	
 	
+	@Operation(summary = "Crear", description = "Crea un topico.")
+	@ApiResponse(responseCode = "204", description = "Content Created" ,content={@Content(mediaType="application/json",schema=@Schema(implementation=DatosRespuestaTopico.class))})  
 	@PostMapping
 	public ResponseEntity<DatosRespuestaTopico> registroTopico(
-			@RequestBody @Valid DatosRegistroTopico datosRegistroTopico,		
+			@ParameterObject @RequestBody @Valid DatosRegistroTopico datosRegistroTopico,		
 			UriComponentsBuilder uriComponentBuilder ) {
-		/* FURUTO: el autor deberia o podria obtenerse desde la sesion */
-		Usuario autor=usuarioRepository.getReferenceById(datosRegistroTopico.autor_id());
+		
+		Usuario autor=((Usuario)SecurityContextHolder.getContext().getAuthentication().getPrincipal());
 		Curso curso=cursoRepository.getReferenceById( datosRegistroTopico.curso_id());
 
 		Topico topico=new Topico(
@@ -67,7 +83,7 @@ public class TopicoController {
 		return ResponseEntity.created(uri).body(datosRespuestaTopico);
 	}
 	
-	
+	@Operation(summary = "Detalle", description = "Obtener el detalle de un topico.")
 	@GetMapping("/{id}")
 	public ResponseEntity<DatosDetalleTopico> detalleTopico(@PathVariable Long id) {
 		Topico topico=topicoRepository.getReferenceById(id);
@@ -75,12 +91,19 @@ public class TopicoController {
 		return ResponseEntity.ok(datosDetalleTopico);
 	}
 	
+	@Operation(summary = "Listado", description = "Obtener una lista de topicos.")
+	@Parameter(in=ParameterIn.QUERY,name="size",example="10")
+	@Parameter(in=ParameterIn.QUERY,name="sort", example="titulo")
+	@Parameter(in=ParameterIn.QUERY,name="offset")
+	@ApiResponse(responseCode = "200", description = "OK",content=@Content)
 	@GetMapping
-	public Page<DatosListadoTopico> listadoTopicos(@PageableDefault(sort = "titulo" ) Pageable paginacion){
+	public Page<DatosListadoTopico> listadoTopicos(@Parameter(hidden=true)  @ParameterObject  Pageable paginacion){
 		return topicoRepository.findAll(paginacion).map(DatosListadoTopico::new);
 	}
 		
-	
+	@Operation(summary = "Actualizar", description = "Actualiza un topico.")
+	@ApiResponse(responseCode = "200", description = "OK",content=@Content)
+	@ApiResponse(responseCode = "404", description = "Not Found",content=@Content)
 	@PutMapping("/{id}")
 	@Transactional
 	public ResponseEntity<DatosRespuestaTopico> actualizarTopico(
@@ -92,9 +115,15 @@ public class TopicoController {
 		return ResponseEntity.ok(new DatosRespuestaTopico(topico));
 	}
 	
+	@SecurityRequirement(name = "bearer-key")
+	@Parameter(in=ParameterIn.HEADER,name = "Authorization", description = "Necesita el JWT Token para poder usar DELETE" ,required=true)
+	@Operation(summary = "Eliminar", description = "Elimina un topicos.")
+	@ApiResponse(responseCode = "200", description = "OK",content=@Content)
+	@ApiResponse(responseCode = "403", description = "Forbidden",content=@Content)
+	@ApiResponse(responseCode = "404", description = "Not Found",content=@Content)
 	@DeleteMapping("/{id}")
 	@Transactional
-	public ResponseEntity deleteTopico(@PathVariable Long id) {
+	public ResponseEntity<Void> deleteTopico(@PathVariable Long id) {
 		topicoRepository.deleteById(id);
 		return ResponseEntity.noContent().build();
 	}	

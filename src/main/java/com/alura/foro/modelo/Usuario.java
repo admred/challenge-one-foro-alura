@@ -2,6 +2,7 @@ package com.alura.foro.modelo;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -94,4 +95,9 @@ public class Usuario implements UserDetails{
 	public String toString() {
 		return "login="+login+",nombre="+nombre+",email="+email+",contrasena="+contrasena;
 	}
+
+	public Long getId() {
+		return this.id;
+	}
+	
 }

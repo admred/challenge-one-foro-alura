@@ -2,6 +2,7 @@ package com.alura.foro.controller;
 
 import java.net.URI;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,6 +24,9 @@ import com.alura.foro.dto.respuesta.DatosRegistroRespuesta;
 import com.alura.foro.repository.RespuestaRepository;
 import com.alura.foro.repository.TopicoRepository;
 import com.alura.foro.repository.UsuarioRepository;
+
+import io.swagger.v3.oas.annotations.Hidden;
+
 import com.alura.foro.modelo.Respuesta;
 import com.alura.foro.modelo.StatusTopico;
 import com.alura.foro.modelo.Topico;
@@ -31,6 +35,7 @@ import com.alura.foro.modelo.Usuario;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
+@Hidden
 @RestController
 @RequestMapping("/respuestas")
 public class RespuestaController {

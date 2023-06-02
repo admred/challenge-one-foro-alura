@@ -21,11 +21,15 @@ import com.alura.foro.dto.usuario.DatosActualizarUsuario;
 import com.alura.foro.dto.usuario.DatosRegistroUsuario;
 import com.alura.foro.dto.usuario.DatosRespuestaUsuario;
 import com.alura.foro.repository.UsuarioRepository;
+
+import io.swagger.v3.oas.annotations.Hidden;
+
 import com.alura.foro.modelo.Usuario;
 
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
+@Hidden
 @RestController
 @RequestMapping("/usuarios")
 public class UsuarioController {
@@ -60,7 +64,7 @@ public class UsuarioController {
 	
 	@DeleteMapping("/{id}")
 	@Transactional
-	public ResponseEntity deleteUsuario(@PathVariable Long id) {
+	public ResponseEntity<Void> deleteUsuario(@PathVariable Long id) {
 		usuarioRepository.deleteById(id);
 		return ResponseEntity.noContent().build();
 	}

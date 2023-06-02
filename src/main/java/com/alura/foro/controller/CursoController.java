@@ -26,10 +26,11 @@ import com.alura.foro.modelo.Curso;
 import com.alura.foro.modelo.Topico;
 import com.alura.foro.repository.CursoRepository;
 
+import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
-
+@Hidden
 @RestController
 @RequestMapping("/cursos")
 public class CursoController {
@@ -58,7 +59,7 @@ public class CursoController {
 	}
 		
 	@GetMapping
-	public Page<DatosRespuestaCurso> listadoCursos(@PageableDefault(sort = "nombre" ) Pageable paginacion){
+	public Page<DatosRespuestaCurso> listadoCursos(@PageableDefault(sort = "nombre",size=10 ) Pageable paginacion){
 		
 		return cursoRepository.findAll(paginacion).map(DatosRespuestaCurso::new);
 	}
@@ -66,7 +67,7 @@ public class CursoController {
 	
 	@DeleteMapping("/{id}")
 	@Transactional
-	public ResponseEntity deleteCurso(@PathVariable Long id) {
+	public ResponseEntity<Void> deleteCurso(@PathVariable Long id) {
 		cursoRepository.deleteById(id);
 		return ResponseEntity.noContent().build();
 	}

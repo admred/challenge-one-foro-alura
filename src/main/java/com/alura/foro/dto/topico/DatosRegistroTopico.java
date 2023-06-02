@@ -22,13 +22,7 @@ public record DatosRegistroTopico(
 		String mensaje,		
 		
 		@NotNull
-		StatusTopico status,
-		
-		@NotNull
-		Long curso_id,
-		
-		@NotNull
-		Long autor_id
+		Long curso_id
 		
 		) {
 
